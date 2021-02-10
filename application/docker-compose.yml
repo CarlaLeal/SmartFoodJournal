@@ -4,12 +4,10 @@ services:
     build: ./food-journal
     container_name: ui
     restart: always
-    expose:
-      - 80
-
-  nginx:
-      build: ./nginx
-      container_name: nginx
-      restart: always
-      ports:
-        - "8002:80"
+    volumes:
+      - "./food-journal:/app"
+      - /app/node_modules
+    ports:
+      - 80:8080
+    environment:
+      - CHOKIDAR_USEPOLLING=true

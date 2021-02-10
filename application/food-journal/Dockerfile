@@ -1,12 +1,11 @@
-FROM node:10.16.0-alpine as build-stage
+FROM node:carbon-slim as build-stage
 WORKDIR /app
 COPY package*.json ./
-RUN yarn
+RUN npm install
+RUN npm install -g @vue/cli
 COPY . .
-RUN npm run build
-
-
-FROM nginx:1.16.1-alpine as production-stage
-COPY --from=build-stage /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD [ "nginx", "-g", "daemon off;"]
+CMD ["npm", "run", "serve"]
+# FROM nginx:1.16.1-alpine as production-stage
+# COPY --from=build-stage /app/dist /usr/share/nginx/html
+# EXPOSE 80
+# CMD [ "nginx", "-g", "daemon off;"]
