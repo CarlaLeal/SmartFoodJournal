@@ -2,7 +2,9 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
-        For Nate's Guides guides
+        For Carla's Guides guides
+        {{this.$store.state.email}}
+        {{this.$store.state.userToken}}
 
       <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
     </p>

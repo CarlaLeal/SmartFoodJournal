@@ -1,31 +1,27 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import router from './router.js';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
 	  state: {
-		    timer: 0,
-		    maxTime: '20:00:00',
-		    userId: null,
-		    userBestTime: null,
-		    favouritedArtists: []
+        email: "",
+        userToken: ""
 	  },
 	  mutations: {
-		    setCurrentTimerValue(state, newTime) {
-			      state.timer = newTime
-		    },
-		    setUserIdForSession(state, userId) {
-			      state.userId = userId
-		    },
-		    setCurrentUserBestTimeValue(state, bestTime) {
-			      state.userBestTime = bestTime
-		    },
-		    setFavouritedArtists(state, favouritedArtists) {
-			      state.favouritedArtists = favouritedArtists
-		    },
-		    setMaxTime(state, maxTime) {
-			      state.maxTime = maxTime
-		    },
-	  }
+        authUser(state, userData) {
+            state.email = userData.email,
+            state.userToken = userData.userToken
+        }
+	  },
+    actions: {
+        login({commit}, authData) {
+            commit('authUser', {
+                "email": authData.email,
+                "userToken": "xSHj"
+            })
+            router.push('/home')
+        }
+    }
 })
